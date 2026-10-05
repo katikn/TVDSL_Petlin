@@ -13,7 +13,6 @@ class TokenRule:
     is_skip: bool = False
 
 FUNNY_TOKEN_RULES: List[TokenRule] = [
-    # Ключевые слова (приоритет 100)
     TokenRule("KEYWORD_FUNCTION",  "function",   100),
     TokenRule("KEYWORD_RETURNS",   "returns",    100),
     TokenRule("KEYWORD_USES",      "uses",       100),
@@ -33,7 +32,6 @@ FUNNY_TOKEN_RULES: List[TokenRule] = [
     TokenRule("KEYWORD_AND",       "and",        100),
     TokenRule("KEYWORD_OR",        "or",         100),
 
-    # Составные операторы (приоритет 90)
     TokenRule("OP_EQ",             "==",         90),
     TokenRule("OP_NEQ",            "!=",         90),
     TokenRule("OP_LE",             "<=",         90),
@@ -41,7 +39,6 @@ FUNNY_TOKEN_RULES: List[TokenRule] = [
     TokenRule("OP_ARROW",          "->",         90),
     TokenRule("OP_FAT_ARROW",      "=>",         90),
 
-    # Одиночные операторы и делимитеры (приоритет 80)
     TokenRule("OP_PLUS",           "\\+",        80),
     TokenRule("OP_MINUS",          "-",          80),
     TokenRule("OP_STAR",           "\\*",        80),
@@ -60,11 +57,9 @@ FUNNY_TOKEN_RULES: List[TokenRule] = [
     TokenRule("DELIM_LBRACE",      "\\{",        80),
     TokenRule("DELIM_RBRACE",      "\\}",        80),
 
-    # Литералы и идентификаторы
     TokenRule("INT",               "0|[1-9][0-9]*",          50),
     TokenRule("IDENT",             "[A-Za-z_][A-Za-z0-9_]*", 40),
 
-    # Пропуск
     TokenRule("COMMENT",           "//[^\\r\\n]*",           30, is_skip=True),
     TokenRule("WS",                "[ \\t\\r\\n]+",          20, is_skip=True),
 ]

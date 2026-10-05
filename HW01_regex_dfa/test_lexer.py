@@ -2,14 +2,11 @@
 import sys
 from lexer import build_pipeline, simulate_dfa_exact, tokenize
 
-# Инициализируем минимизированный ДКА
 DFA_MODEL, STATS = build_pipeline()
 
 EXACT_CASES = [
-    # Пустая строка
     ("empty_string", "", False, None),
 
-    # Пробелы и переводы строк (WS)
     ("ws_space", " ", True, "WS"),
     ("ws_spaces", "    ", True, "WS"),
     ("ws_tab", "\t", True, "WS"),
@@ -17,7 +14,6 @@ EXACT_CASES = [
     ("ws_lf", "\n", True, "WS"),
     ("ws_mixed", " \t\r\n ", True, "WS"),
 
-    # Числовые литералы и ведущие нули (отрицательные тесты)
     ("int_zero", "0", True, "INT"),
     ("int_positive", "42", True, "INT"),
     ("int_large", "100500", True, "INT"),
@@ -25,14 +21,12 @@ EXACT_CASES = [
     ("int_neg_01", "01", False, None),
     ("int_neg_007", "007", False, None),
 
-    # Идентификаторы (включая подчеркивание)
     ("ident_char", "x", True, "IDENT"),
     ("ident_underscore_only", "_", True, "IDENT"),
     ("ident_underscore_prefix", "_temp", True, "IDENT"),
     ("ident_underscore_middle", "var_name", True, "IDENT"),
     ("ident_with_digits", "val123_", True, "IDENT"),
 
-    # Все 18 ключевых слов Funny
     ("kw_function", "function", True, "KEYWORD_FUNCTION"),
     ("kw_returns", "returns", True, "KEYWORD_RETURNS"),
     ("kw_uses", "uses", True, "KEYWORD_USES"),
@@ -52,7 +46,6 @@ EXACT_CASES = [
     ("kw_and", "and", True, "KEYWORD_AND"),
     ("kw_or", "or", True, "KEYWORD_OR"),
 
-    # Операторы и делимитеры
     ("op_eq", "==", True, "OP_EQ"),
     ("op_neq", "!=", True, "OP_NEQ"),
     ("op_le", "<=", True, "OP_LE"),
@@ -76,12 +69,10 @@ EXACT_CASES = [
     ("delim_semicolon", ";", True, "DELIM_SEMICOLON"),
     ("delim_colon", ":", True, "DELIM_COLON"),
 
-    # Комментарии
     ("comment_empty", "//", True, "COMMENT"),
     ("comment_text", "// simple comment", True, "COMMENT"),
     ("comment_with_code", "// x = 42; assert;", True, "COMMENT"),
 
-    # Ловушка: символы вне алфавита и non-ASCII
     ("trap_at", "@", False, None),
     ("trap_dollar", "$", False, None),
     ("trap_hash", "#", False, None),
