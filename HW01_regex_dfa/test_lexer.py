@@ -1,19 +1,10 @@
 #!/usr/bin/env python3
-"""
-HW1: Тестовый набор для лексера языка Funny (test_lexer.py).
-Проверяет все сценарии из спецификации HW1 и краевые случаи токенов.
-
-Запуск:
-    python3 test_lexer.py
-"""
-
 import sys
 from lexer import build_pipeline, simulate_dfa_exact, tokenize
 
 # Инициализируем минимизированный ДКА
 DFA_MODEL, STATS = build_pipeline()
 
-# 1. Тестовые сценарии точного распознавания одиночных токенов
 EXACT_CASES = [
     # Пустая строка
     ("empty_string", "", False, None),
@@ -98,7 +89,6 @@ EXACT_CASES = [
     ("trap_unicode", "café", False, None),
 ]
 
-# 2. Тестовые сценарии потокового разбора
 STREAM_CASES = [
     (
         "stream_whitespace_only",
@@ -175,7 +165,6 @@ def run_all_tests() -> bool:
     print(f"Состояния: НКА={STATS['nfa_states']} | ДКА={STATS['dfa_states']} | Мин={STATS['min_dfa_states']}")
     print("=" * 70)
 
-    # 1. Прогон одиночных тестов
     passed_exact = 0
     for name, text, should_accept, expected_tok in EXACT_CASES:
         ok, got_tok = simulate_dfa_exact(DFA_MODEL, text)
@@ -192,7 +181,6 @@ def run_all_tests() -> bool:
     print(f"Одиночные тесты: {passed_exact}/{len(EXACT_CASES)} пройдено.")
     print("-" * 70)
 
-    # 2. Прогон потоковых тестов
     passed_stream = 0
     for name, text, expected_tokens in STREAM_CASES:
         got = [t.type for t in tokenize(text, DFA_MODEL)]
