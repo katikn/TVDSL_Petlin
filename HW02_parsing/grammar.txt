@@ -1,0 +1,57 @@
+
+Module          ::= Declaration* EOF
+Declaration     ::= FunctionDecl | FormulaDecl
+
+FunctionDecl    ::= ["function"] IDENT "(" ParamList ")"
+                    ["requires" Predicate]
+                    "returns" ParamList
+                    ["ensures" Predicate]
+                    ["uses" ParamList]
+                    Statement
+
+FormulaDecl     ::= IDENT "(" ParamList ")" "=>" Predicate [";"]
+
+ParamList       ::= [ VarDef ("," VarDef)* ]
+VarDef          ::= IDENT [":" Type]
+Type            ::= "int" [ "[]" ]
+
+Statement       ::= BlockStmt
+                  | IfStmt
+                  | WhileStmt
+                  | AssertStmt
+                  | AssumeStmt
+                  | AssignStmt
+
+BlockStmt       ::= "{" Statement* "}"
+IfStmt          ::= "if" "(" Predicate ")" Statement ["else" Statement]
+WhileStmt       ::= "while" "(" Predicate ")" ["invariant" Predicate] Statement
+AssertStmt      ::= "assert" Predicate ";"
+AssumeStmt      ::= "assume" Predicate ";"
+
+AssignStmt      ::= IDENT "[" Expression "]" "=" Expression ";"
+                  | IDENT ("," IDENT)* "=" Expression ";"
+
+Predicate       ::= "forall" "(" VarDef "|" Predicate ")"
+                  | "exists" "(" VarDef "|" Predicate ")"
+                  | Implies
+
+Implies         ::= OrExpr [ "->" Implies ]          /* Правоассоциативная */
+OrExpr          ::= AndExpr ( "or" AndExpr )*
+AndExpr         ::= NotExpr ( "and" NotExpr )*
+NotExpr         ::= "not" NotExpr | Comparison
+
+Comparison      ::= AddExpr [ CmpOp AddExpr ]
+CmpOp           ::= "==" | "!=" | "<=" | ">=" | "<" | ">"
+
+AddExpr         ::= MulExpr ( ("+" | "-") MulExpr )*
+MulExpr         ::= UnaryExpr ( ("*" | "/") UnaryExpr )*
+UnaryExpr       ::= "-" UnaryExpr | Primary
+
+Primary         ::= INT
+                  | "true" | "false"
+                  | "length" "(" Expression ")"
+                  | "(" Predicate ")"
+                  | IDENT [ "(" ArgList ")" | "[" Expression "]" ]
+
+ArgList         ::= [ Expression ("," Expression)* ]
+Expression      ::= Predicate
