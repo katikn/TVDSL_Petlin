@@ -1,0 +1,172 @@
+{
+  "_node": "ModuleNode",
+  "line": 1,
+  "col": 1,
+  "declarations": [
+    {
+      "_node": "FunctionNode",
+      "line": 1,
+      "col": 1,
+      "name": "max",
+      "params": [
+        {
+          "_node": "VarDefNode",
+          "line": 1,
+          "col": 14,
+          "name": "a",
+          "type_str": "int"
+        },
+        {
+          "_node": "VarDefNode",
+          "line": 1,
+          "col": 22,
+          "name": "b",
+          "type_str": "int"
+        }
+      ],
+      "returns": [
+        {
+          "_node": "VarDefNode",
+          "line": 1,
+          "col": 38,
+          "name": "m",
+          "type_str": "int"
+        }
+      ],
+      "body": {
+        "_node": "BlockStmtNode",
+        "line": 1,
+        "col": 45,
+        "statements": [
+          {
+            "_node": "IfStmtNode",
+            "line": 2,
+            "col": 5,
+            "condition": {
+              "_node": "BinaryOpNode",
+              "line": 2,
+              "col": 9,
+              "op": ">",
+              "left": {
+                "_node": "VariableNode",
+                "line": 2,
+                "col": 9,
+                "name": "a",
+                "inferred_type": "int"
+              },
+              "right": {
+                "_node": "VariableNode",
+                "line": 2,
+                "col": 13,
+                "name": "b",
+                "inferred_type": "int"
+              },
+              "inferred_type": "bool"
+            },
+            "then_branch": {
+              "_node": "BlockStmtNode",
+              "line": 2,
+              "col": 16,
+              "statements": [
+                {
+                  "_node": "AssignStmtNode",
+                  "line": 3,
+                  "col": 9,
+                  "targets": [
+                    "m"
+                  ],
+                  "value": {
+                    "_node": "VariableNode",
+                    "line": 3,
+                    "col": 13,
+                    "name": "a",
+                    "inferred_type": "int"
+                  }
+                }
+              ]
+            },
+            "else_branch": {
+              "_node": "BlockStmtNode",
+              "line": 4,
+              "col": 12,
+              "statements": [
+                {
+                  "_node": "AssignStmtNode",
+                  "line": 5,
+                  "col": 9,
+                  "targets": [
+                    "m"
+                  ],
+                  "value": {
+                    "_node": "VariableNode",
+                    "line": 5,
+                    "col": 13,
+                    "name": "b",
+                    "inferred_type": "int"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "_node": "AssertStmtNode",
+            "line": 7,
+            "col": 5,
+            "predicate": {
+              "_node": "BinaryOpNode",
+              "line": 7,
+              "col": 12,
+              "op": "and",
+              "left": {
+                "_node": "BinaryOpNode",
+                "line": 7,
+                "col": 12,
+                "op": ">=",
+                "left": {
+                  "_node": "VariableNode",
+                  "line": 7,
+                  "col": 12,
+                  "name": "m",
+                  "inferred_type": "int"
+                },
+                "right": {
+                  "_node": "VariableNode",
+                  "line": 7,
+                  "col": 17,
+                  "name": "a",
+                  "inferred_type": "int"
+                },
+                "inferred_type": "bool"
+              },
+              "right": {
+                "_node": "BinaryOpNode",
+                "line": 7,
+                "col": 23,
+                "op": ">=",
+                "left": {
+                  "_node": "VariableNode",
+                  "line": 7,
+                  "col": 23,
+                  "name": "m",
+                  "inferred_type": "int"
+                },
+                "right": {
+                  "_node": "VariableNode",
+                  "line": 7,
+                  "col": 28,
+                  "name": "b",
+                  "inferred_type": "int"
+                },
+                "inferred_type": "bool"
+              },
+              "inferred_type": "bool"
+            }
+          }
+        ]
+      },
+      "requires": null,
+      "ensures": null,
+      "uses": []
+    }
+  ]
+}
